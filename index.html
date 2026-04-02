@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MEEVO V11</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+
+<div class="header">
+<h1>MEEVO</h1>
+<p>Sua prática médica, organizada e sob controle</p>
+</div>
+
+<div class="card">
+<label>Paciente</label>
+<input id="paciente">
+
+<label>Sexo</label>
+<select id="sexo">
+<option value="M">Masculino</option>
+<option value="F">Feminino</option>
+</select>
+</div>
+
+<div class="card">
+<h3>GERAL</h3>
+
+<div class="group">
+<p>Estado geral</p>
+<div class="chips" id="estado">
+<button>EGB</button>
+<button>EGR</button>
+<button>EGRuim</button>
+</div>
+</div>
+
+<div class="group">
+<p>Hidratação</p>
+<div class="chips" id="hidratacao">
+<button>Hidratado</button>
+<button>Desidratado</button>
+</div>
+<div id="grau" class="chips hidden">
+<button>+</button><button>++</button><button>+++</button><button>++++</button>
+</div>
+</div>
+
+</div>
+
+<div class="card">
+<h3>AN</h3>
+
+<div class="chips" id="consciencia">
+<button>Vigil</button>
+<button>Sonolento</button>
+<button>Obnubilado</button>
+<button>Coma</button>
+<button>Sedado</button>
+</div>
+
+<div id="glasgow" class="hidden">
+<p>Glasgow</p>
+<div class="chips" id="ao">
+<button>4</button><button>3</button><button>2</button><button>1</button>
+</div>
+<div class="chips" id="rv">
+<button>5</button><button>4</button><button>3</button><button>2</button><button>1</button>
+</div>
+<div class="chips" id="rm">
+<button>6</button><button>5</button><button>4</button><button>3</button><button>2</button><button>1</button>
+</div>
+</div>
+
+</div>
+
+<div class="card output">
+<h3>Evolução</h3>
+<pre id="out"></pre>
+</div>
+
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
