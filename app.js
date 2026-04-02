@@ -1,52 +1,53 @@
-function activate(group){
-let buttons=document.querySelectorAll('#'+group+' button')
-buttons.forEach(b=>{
-b.onclick=()=>{
-buttons.forEach(x=>x.classList.remove('active'))
-b.classList.add('active')
 
-if(group==='hidratacao'){
-document.getElementById('grau').classList.toggle('hidden',b.innerText!=='Desidratado')
+function show(id){
+document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'))
+document.getElementById(id).classList.add('active')
 }
-if(group==='consciencia'){
-document.getElementById('glasgow').classList.toggle('hidden',b.innerText==='Sedado')
-}
+
+document.querySelectorAll('#estado button').forEach(b=>{
+b.onclick=()=>{
+document.querySelectorAll('#estado button').forEach(x=>x.classList.remove('active'))
+b.classList.add('active')
 update()
 }
 })
+
+function normal(){
+let b=document.querySelector('#estado button')
+if(b){
+b.classList.add('active')
+update()
 }
-
-['estado','hidratacao','consciencia','ao','rv','rm','grau'].forEach(activate)
-
-function get(id){
-return document.querySelector('#'+id+' .active')?.innerText||""
 }
 
 function update(){
-let txt=""
-
-let est=get('estado')
-let hidr=get('hidratacao')
-let grau=get('grau')
-
-if(hidr==="Desidratado" && grau){
-hidr+=` (${grau}/4+)`
+let est=document.querySelector('#estado .active')?.innerText||""
+document.getElementById('texto').innerText="GERAL: "+est
 }
 
-txt+=`GERAL: ${[est,hidr].filter(Boolean).join(", ")}.\n`
-
-let cons=get('consciencia')
-let ao=get('ao')
-let rv=get('rv')
-let rm=get('rm')
-
-let soma=Number(ao)+Number(rv)+Number(rm)
-
-if(cons && cons!=="Sedado"){
-txt+=`AN: ${cons}. ECG ${soma}.`
-}else{
-txt+=`AN: ${cons}.`
+function copiar(){
+navigator.clipboard.writeText(document.getElementById('texto').innerText)
 }
 
-document.getElementById('out').innerText=txt
+function addAgenda(){
+let d=document.getElementById('agendaDesc').value
+let v=document.getElementById('agendaVal').value
+let li=document.createElement('li')
+li.innerText=d+" - R$ "+v
+document.getElementById('listaAgenda').appendChild(li)
+}
+
+function addFin(){
+let d=document.getElementById('finDesc').value
+let v=document.getElementById('finVal').value
+let li=document.createElement('li')
+li.innerText=d+" - R$ "+v
+document.getElementById('listaFin').appendChild(li)
+}
+
+function addTask(){
+let t=document.getElementById('taskInput').value
+let li=document.createElement('li')
+li.innerText=t
+document.getElementById('listaTask').appendChild(li)
 }

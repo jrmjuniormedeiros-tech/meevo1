@@ -1,85 +1,72 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MEEVO V11</title>
+<title>MEEVO V12</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="container">
+<div class="app">
 
 <div class="header">
 <h1>MEEVO</h1>
-<p>Sua prática médica, organizada e sob controle</p>
+<p>Sua prática médica organizada e sob controle</p>
 </div>
 
-<div class="card">
+<div class="menu">
+<button onclick="show('hospital')">🏥 Hospitalar</button>
+<button onclick="show('agenda')">📅 Agenda</button>
+<button onclick="show('financas')">💰 Finanças</button>
+<button onclick="show('rotina')">🧠 Rotina</button>
+</div>
+
+<div id="hospital" class="screen active">
+<h2>Hospitalar</h2>
+
 <label>Paciente</label>
 <input id="paciente">
 
-<label>Sexo</label>
-<select id="sexo">
-<option value="M">Masculino</option>
-<option value="F">Feminino</option>
-</select>
-</div>
+<h3>Exame físico</h3>
 
-<div class="card">
-<h3>GERAL</h3>
+<button onclick="normal()">Exame físico normal</button>
 
-<div class="group">
-<p>Estado geral</p>
 <div class="chips" id="estado">
 <button>EGB</button>
-<button>EGR</button>
-<button>EGRuim</button>
-</div>
+<button>Regular</button>
+<button>Ruim</button>
 </div>
 
-<div class="group">
-<p>Hidratação</p>
-<div class="chips" id="hidratacao">
-<button>Hidratado</button>
-<button>Desidratado</button>
-</div>
-<div id="grau" class="chips hidden">
-<button>+</button><button>++</button><button>+++</button><button>++++</button>
-</div>
+<div class="output">
+<pre id="texto">GERAL:</pre>
+<button onclick="copiar()">Copiar</button>
 </div>
 
 </div>
 
-<div class="card">
-<h3>AN</h3>
-
-<div class="chips" id="consciencia">
-<button>Vigil</button>
-<button>Sonolento</button>
-<button>Obnubilado</button>
-<button>Coma</button>
-<button>Sedado</button>
+<div id="agenda" class="screen">
+<h2>Agenda</h2>
+<input id="agendaDesc" placeholder="Plantão">
+<input id="agendaVal" type="number" placeholder="Valor">
+<button onclick="addAgenda()">Adicionar</button>
+<ul id="listaAgenda"></ul>
 </div>
 
-<div id="glasgow" class="hidden">
-<p>Glasgow</p>
-<div class="chips" id="ao">
-<button>4</button><button>3</button><button>2</button><button>1</button>
-</div>
-<div class="chips" id="rv">
-<button>5</button><button>4</button><button>3</button><button>2</button><button>1</button>
-</div>
-<div class="chips" id="rm">
-<button>6</button><button>5</button><button>4</button><button>3</button><button>2</button><button>1</button>
-</div>
+<div id="financas" class="screen">
+<h2>Finanças</h2>
+<input id="finDesc" placeholder="Descrição">
+<input id="finVal" type="number" placeholder="Valor">
+<button onclick="addFin()">Adicionar</button>
+<ul id="listaFin"></ul>
 </div>
 
-</div>
-
-<div class="card output">
-<h3>Evolução</h3>
-<pre id="out"></pre>
+<div id="rotina" class="screen">
+<h2>Rotina</h2>
+<input id="taskInput" placeholder="Tarefa">
+<button onclick="addTask()">Adicionar</button>
+<ul id="listaTask"></ul>
 </div>
 
 </div>
