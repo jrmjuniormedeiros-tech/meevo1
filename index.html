@@ -1,73 +1,93 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MEEVO V12</title>
+<title>MEEVO V15</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <div class="app">
 
-<div class="header">
+<header>
 <h1>MEEVO</h1>
 <p>Sua prática médica organizada e sob controle</p>
-</div>
+</header>
 
-<div class="menu">
-<button onclick="show('hospital')">🏥 Hospitalar</button>
-<button onclick="show('agenda')">📅 Agenda</button>
-<button onclick="show('financas')">💰 Finanças</button>
-<button onclick="show('rotina')">🧠 Rotina</button>
-</div>
+<nav class="menu">
+<button onclick="nav('home')">🏠</button>
+<button onclick="nav('hospital')">🏥</button>
+<button onclick="nav('agenda')">📅</button>
+<button onclick="nav('financas')">💰</button>
+<button onclick="nav('rotina')">🧠</button>
+</nav>
 
-<div id="hospital" class="screen active">
+<section id="home" class="screen active">
+<h2>Dashboard</h2>
+<div id="resumo"></div>
+</section>
+
+<section id="hospital" class="screen">
 <h2>Hospitalar</h2>
 
-<label>Paciente</label>
-<input id="paciente">
+<h3>Paciente</h3>
+<input id="p_nome" placeholder="Nome">
+<select id="p_sexo">
+<option value="M">Masculino</option>
+<option value="F">Feminino</option>
+</select>
+<button onclick="addPaciente()">Salvar paciente</button>
 
-<h3>Exame físico</h3>
-
-<button onclick="normal()">Exame físico normal</button>
-
+<h3>Exame físico (resumo)</h3>
 <div class="chips" id="estado">
 <button>EGB</button>
-<button>Regular</button>
-<button>Ruim</button>
+<button>EGR</button>
+<button>EGRuim</button>
 </div>
 
-<div class="output">
-<pre id="texto">GERAL:</pre>
-<button onclick="copiar()">Copiar</button>
-</div>
+<pre id="ef_out"></pre>
 
-</div>
+<h3>Alertas</h3>
+<input id="alerta_txt" placeholder="Descrição">
+<input id="alerta_time" placeholder="minutos">
+<button onclick="addAlerta()">Criar alerta</button>
+<ul id="listaAlertas"></ul>
 
-<div id="agenda" class="screen">
+</section>
+
+<section id="agenda" class="screen">
 <h2>Agenda</h2>
-<input id="agendaDesc" placeholder="Plantão">
-<input id="agendaVal" type="number" placeholder="Valor">
+<input id="ag_desc" placeholder="Evento">
+<input id="ag_data" type="date">
+<input id="ag_inicio" type="time">
+<input id="ag_fim" type="time">
+<input id="ag_valor" type="number" placeholder="Valor (plantão)">
 <button onclick="addAgenda()">Adicionar</button>
 <ul id="listaAgenda"></ul>
-</div>
+</section>
 
-<div id="financas" class="screen">
+<section id="financas" class="screen">
 <h2>Finanças</h2>
-<input id="finDesc" placeholder="Descrição">
-<input id="finVal" type="number" placeholder="Valor">
+<input id="fin_desc" placeholder="Descrição">
+<input id="fin_valor" type="number" placeholder="Valor">
+<select id="fin_tipo">
+<option value="fixo">Fixo</option>
+<option value="variavel">Variável</option>
+</select>
 <button onclick="addFin()">Adicionar</button>
 <ul id="listaFin"></ul>
-</div>
+<pre id="fin_resumo"></pre>
+</section>
 
-<div id="rotina" class="screen">
+<section id="rotina" class="screen">
 <h2>Rotina</h2>
-<input id="taskInput" placeholder="Tarefa">
-<button onclick="addTask()">Adicionar</button>
-<ul id="listaTask"></ul>
-</div>
+<input id="rot_desc" placeholder="Atividade">
+<input id="rot_dia" placeholder="Dia">
+<input id="rot_hora" placeholder="Hora">
+<button onclick="addRotina()">Adicionar</button>
+<ul id="listaRotina"></ul>
+</section>
 
 </div>
 
