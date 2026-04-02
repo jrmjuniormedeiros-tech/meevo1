@@ -3,46 +3,110 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MEEVO Functional</title>
+<title>MEEVO V15</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<h1>MEEVO</h1>
+<div class="app">
 
-<nav>
-<button onclick="nav('hospital')">Hospitalar</button>
-<button onclick="nav('agenda')">Agenda</button>
-<button onclick="nav('financas')">Finanças</button>
+<header>
+<h1>MEEVO</h1>
+<p>Sua prática médica organizada e sob controle</p>
+</header>
+
+<nav class="tabs">
+<button onclick="go('home')">Home</button>
+<button onclick="go('hospital')">Hospitalar</button>
+<button onclick="go('agenda')">Agenda</button>
+<button onclick="go('financas')">Finanças</button>
+<button onclick="go('rotina')">Rotina</button>
 </nav>
 
-<div id="hospital" class="screen active">
-<h2>Hospitalar</h2>
+<section id="home" class="screen active">
+<div class="card">
+<h2>Resumo</h2>
+<p id="homeResumo"></p>
+</div>
+</section>
 
-<input id="paciente" placeholder="Paciente">
-<button onclick="setPaciente()">Selecionar</button>
+<section id="hospital" class="screen">
+<div class="card">
+<h3>Hospital</h3>
+<input id="hospitalNome" placeholder="Nome do hospital">
+<button onclick="addHospital()">Salvar hospital</button>
+<select id="hospitalSelect" onchange="setHospital()"></select>
+</div>
 
+<div class="card">
+<h3>Paciente</h3>
+<input id="pacienteNome" placeholder="Nome do paciente">
+<select id="pacienteSexo">
+<option>M</option><option>F</option>
+</select>
+<button onclick="addPaciente()">Salvar paciente</button>
+<select id="pacienteSelect" onchange="setPaciente()"></select>
+</div>
+
+<div class="card">
 <h3>Evolução</h3>
-<textarea id="evolucao" placeholder="Digite evolução"></textarea>
+<textarea id="evolucao"></textarea>
 <button onclick="salvarEvolucao()">Salvar</button>
-
-<h3>PDF</h3>
-<input type="file" id="pdfInput">
-<pre id="pdfText"></pre>
-
+<ul id="listaEvolucoes"></ul>
 </div>
 
-<div id="agenda" class="screen">
-<h2>Agenda</h2>
-<input id="agDesc" placeholder="Evento">
+<div class="card">
+<h3>Exame físico</h3>
+<div class="chips" id="estado">
+<button>EGB</button><button>EGR</button><button>Ruim</button>
+</div>
+<pre id="efTexto"></pre>
+</div>
+
+<div class="card">
+<h3>Alertas</h3>
+<input id="alertaDesc" placeholder="Descrição">
+<input id="alertaTempo" placeholder="min">
+<button onclick="addAlerta()">Criar</button>
+<ul id="listaAlertas"></ul>
+</div>
+</section>
+
+<section id="agenda" class="screen">
+<div class="card">
+<h3>Novo evento</h3>
+<input id="agTitulo" placeholder="Título">
+<input type="date" id="agData">
+<input type="time" id="agInicio">
+<input type="time" id="agFim">
 <input id="agValor" type="number" placeholder="Valor">
-<button onclick="addAgenda()">Adicionar</button>
-<ul id="listaAgenda"></ul>
+<button onclick="addAgenda()">Salvar</button>
 </div>
+<ul id="agendaLista"></ul>
+</section>
 
-<div id="financas" class="screen">
-<h2>Finanças</h2>
-<ul id="listaFin"></ul>
+<section id="financas" class="screen">
+<div class="card">
+<h3>Nova saída</h3>
+<input id="finDesc" placeholder="Descrição">
+<input id="finVal" type="number">
+<button onclick="addFin()">Salvar</button>
+</div>
+<ul id="finLista"></ul>
+<p id="finResumo"></p>
+</section>
+
+<section id="rotina" class="screen">
+<div class="card">
+<h3>Nova atividade</h3>
+<input id="rotDesc" placeholder="Atividade">
+<input id="rotDia" placeholder="Dia">
+<input id="rotHora" placeholder="Hora">
+<button onclick="addRot()">Salvar</button>
+</div>
+<ul id="rotLista"></ul>
+</section>
+
 </div>
 
 <script src="app.js"></script>
