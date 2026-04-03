@@ -1,111 +1,65 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MEEVO V15</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <title>MeEvolui</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="app">
+<h1>🧠 MeEvolui</h1>
 
-<header>
-<h1>MEEVO</h1>
-<p>Sua prática médica organizada e sob controle</p>
-</header>
+<div class="container">
 
-<nav class="tabs">
-<button onclick="go('home')">Home</button>
-<button onclick="go('hospital')">Hospitalar</button>
-<button onclick="go('agenda')">Agenda</button>
-<button onclick="go('financas')">Finanças</button>
-<button onclick="go('rotina')">Rotina</button>
-</nav>
+  <section>
+    <h2>📋 Identificação</h2>
+    <textarea placeholder="H.D."></textarea>
+    <textarea placeholder="H.M.A."></textarea>
+    <textarea placeholder="Alergias"></textarea>
+    <textarea placeholder="Comorbidades"></textarea>
+    <textarea placeholder="H.P.P."></textarea>
+    <textarea placeholder="H.P.C."></textarea>
+    <textarea placeholder="M.U.C."></textarea>
+  </section>
 
-<section id="home" class="screen active">
-<div class="card">
-<h2>Resumo</h2>
-<p id="homeResumo"></p>
-</div>
-</section>
+  <section>
+    <h2>🧪 Laboratório</h2>
+    <textarea id="labInput" placeholder="Cole exames aqui"></textarea>
+    <button onclick="parseLab()">Organizar</button>
+    <pre id="labOutput"></pre>
+  </section>
 
-<section id="hospital" class="screen">
-<div class="card">
-<h3>Hospital</h3>
-<input id="hospitalNome" placeholder="Nome do hospital">
-<button onclick="addHospital()">Salvar hospital</button>
-<select id="hospitalSelect" onchange="setHospital()"></select>
-</div>
+  <section>
+    <h2>💉 DVA</h2>
+    <input id="peso" placeholder="Peso (kg)">
+    <input id="dose" placeholder="Dose (mcg/kg/min)">
+    <button onclick="calcDVA()">Calcular</button>
+    <p id="resultadoDVA"></p>
+  </section>
 
-<div class="card">
-<h3>Paciente</h3>
-<input id="pacienteNome" placeholder="Nome do paciente">
-<select id="pacienteSexo">
-<option>M</option><option>F</option>
-</select>
-<button onclick="addPaciente()">Salvar paciente</button>
-<select id="pacienteSelect" onchange="setPaciente()"></select>
-</div>
+  <section>
+    <h2>💤 Sedoanalgesia</h2>
+    <input id="pesoSed" placeholder="Peso (kg)">
+    <input id="doseSed" placeholder="Dose">
+    <button onclick="calcSed()">Calcular</button>
+    <p id="resultadoSed"></p>
+  </section>
 
-<div class="card">
-<h3>Evolução</h3>
-<textarea id="evolucao"></textarea>
-<button onclick="salvarEvolucao()">Salvar</button>
-<ul id="listaEvolucoes"></ul>
-</div>
+  <section>
+    <h2>🧾 Prescrição</h2>
+    <textarea id="prescInput"></textarea>
+    <button onclick="organizarPrescricao()">Organizar</button>
+    <pre id="prescOutput"></pre>
+  </section>
 
-<div class="card">
-<h3>Exame físico</h3>
-<div class="chips" id="estado">
-<button>EGB</button><button>EGR</button><button>Ruim</button>
-</div>
-<pre id="efTexto"></pre>
-</div>
-
-<div class="card">
-<h3>Alertas</h3>
-<input id="alertaDesc" placeholder="Descrição">
-<input id="alertaTempo" placeholder="min">
-<button onclick="addAlerta()">Criar</button>
-<ul id="listaAlertas"></ul>
-</div>
-</section>
-
-<section id="agenda" class="screen">
-<div class="card">
-<h3>Novo evento</h3>
-<input id="agTitulo" placeholder="Título">
-<input type="date" id="agData">
-<input type="time" id="agInicio">
-<input type="time" id="agFim">
-<input id="agValor" type="number" placeholder="Valor">
-<button onclick="addAgenda()">Salvar</button>
-</div>
-<ul id="agendaLista"></ul>
-</section>
-
-<section id="financas" class="screen">
-<div class="card">
-<h3>Nova saída</h3>
-<input id="finDesc" placeholder="Descrição">
-<input id="finVal" type="number">
-<button onclick="addFin()">Salvar</button>
-</div>
-<ul id="finLista"></ul>
-<p id="finResumo"></p>
-</section>
-
-<section id="rotina" class="screen">
-<div class="card">
-<h3>Nova atividade</h3>
-<input id="rotDesc" placeholder="Atividade">
-<input id="rotDia" placeholder="Dia">
-<input id="rotHora" placeholder="Hora">
-<button onclick="addRot()">Salvar</button>
-</div>
-<ul id="rotLista"></ul>
-</section>
+  <section>
+    <h2>🩺 Exame Físico</h2>
+    <textarea placeholder="AN"></textarea>
+    <textarea placeholder="AR"></textarea>
+    <textarea placeholder="ACV"></textarea>
+    <textarea placeholder="ABD"></textarea>
+    <textarea placeholder="EXT"></textarea>
+  </section>
 
 </div>
 

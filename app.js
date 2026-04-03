@@ -1,86 +1,61 @@
-let db=JSON.parse(localStorage.getItem('meevo')||'{}')
-db.hospitais=db.hospitais||[]
-db.pacientes=db.pacientes||{}
-db.evolucoes=db.evolucoes||{}
-db.agenda=db.agenda||[]
-db.financas=db.financas||[]
-db.rotina=db.rotina||[]
-db.alertas=db.alertas||[]
+function parseLab() {
+  let input = document.getElementById("labInput").value;
 
-function save(){localStorage.setItem('meevo',JSON.stringify(db));render()}
+  let exames = [
+    "Hb", "Ht", "Leuco", "Plaqt", "Cr", "Ur",
+    "Na", "K", "Mg", "Ca", "Cl",
+    "TGO", "TGP", "INR", "PCR", "Lac"
+  ];
 
-function go(id){
-document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'))
-document.getElementById(id).classList.add('active')
+  let output = "";
+
+  exames.forEach(e => {
+    let regex = new RegExp(e + "\\s*:?\\s*(\\d+\\.?\\d*)", "i");
+    let match = input.match(regex);
+    if (match) output += `${e}: ${match[1]}\n`;
+  });
+
+  document.getElementById("labOutput").innerText = output;
 }
 
-function addHospital(){
-let nome=hospitalNome.value
-db.hospitais.push(nome)
-save()
+function calcDVA() {
+  let peso = document.getElementById("peso").value;
+  let dose = document.getElementById("dose").value;
+
+  let resultado = peso * dose;
+  document.getElementById("resultadoDVA").innerText =
+    `Dose total: ${resultado} mcg/min`;
 }
 
-function setHospital(){
-db.hospitalAtivo=hospitalSelect.value
-save()
+function calcSed() {
+  let peso = document.getElementById("pesoSed").value;
+  let dose = document.getElementById("doseSed").value;
+
+  let resultado = peso * dose;
+  document.getElementById("resultadoSed").innerText =
+    `Dose: ${resultado}`;
 }
 
-function addPaciente(){
-let nome=pacienteNome.value
-db.pacientes[nome]={sexo:pacienteSexo.value}
-save()
-}
+function organizarPrescricao() {
+  let texto = document.getElementById("prescInput").value.toLowerCase();
 
-function setPaciente(){
-db.pacienteAtivo=pacienteSelect.value
-save()
-}
+  let categorias = {
+    "Antibióticos": ["cef", "piper", "mero"],
+    "Anti-hipertensivos": ["losartan", "enalapril"],
+    "Psicotrópicos": ["diazepam", "haloperidol"]
+  };
 
-function salvarEvolucao(){
-let p=db.pacienteAtivo
-db.evolucoes[p]=db.evolucoes[p]||[]
-db.evolucoes[p].push(evolucao.value)
-save()
-}
+  let output = "";
 
-document.querySelectorAll('#estado button').forEach(b=>{
-b.onclick=()=>{
-document.querySelectorAll('#estado button').forEach(x=>x.classList.remove('active'))
-b.classList.add('active')
-efTexto.innerText="GERAL: "+b.innerText
-}
-})
+  for (let cat in categorias) {
+    output += `\n${cat}:\n`;
 
-function addAgenda(){
-db.agenda.push({t:agTitulo.value,d:agData.value,v:Number(agValor.value||0)})
-db.financas.push({desc:agTitulo.value,val:Number(agValor.value||0)})
-save()
-}
+    categorias[cat].forEach(droga => {
+      if (texto.includes(droga)) {
+        output += "- " + droga + "\n";
+      }
+    });
+  }
 
-function addFin(){
-db.financas.push({desc:finDesc.value,val:Number(finVal.value||0)})
-save()
+  document.getElementById("prescOutput").innerText = output;
 }
-
-function addRot(){
-db.rotina.push({desc:rotDesc.value})
-save()
-}
-
-function addAlerta(){
-db.alertas.push({txt:alertaDesc.value})
-save()
-}
-
-function render(){
-hospitalSelect.innerHTML=db.hospitais.map(h=>`<option>${h}</option>`).join('')
-pacienteSelect.innerHTML=Object.keys(db.pacientes).map(p=>`<option>${p}</option>`).join('')
-agendaLista.innerHTML=db.agenda.map(e=>`<li>${e.t}</li>`).join('')
-finLista.innerHTML=db.financas.map(e=>`<li>${e.desc} R$${e.val}</li>`).join('')
-rotLista.innerHTML=db.rotina.map(e=>`<li>${e.desc}</li>`).join('')
-listaAlertas.innerHTML=db.alertas.map(a=>`<li>${a.txt}</li>`).join('')
-homeResumo.innerText=`Hospitais:${db.hospitais.length} | Pacientes:${Object.keys(db.pacientes).length}`
-finResumo.innerText="Total: R$ "+db.financas.reduce((a,b)=>a+b.val,0)
-}
-
-render()
